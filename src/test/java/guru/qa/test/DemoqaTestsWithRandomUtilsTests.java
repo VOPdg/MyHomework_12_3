@@ -9,6 +9,8 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+import static guru.qa.utils.RandomUtils.getRandomEmail;
+import static guru.qa.utils.RandomUtils.getRandomString;
 import static java.lang.String.format;
 
 public class DemoqaTestsWithRandomUtilsTests {
@@ -21,9 +23,9 @@ public class DemoqaTestsWithRandomUtilsTests {
 
     @Test
     void fillformTest() {
-        String name = "Vera";
-        String lastName = "Podguk";
-        String email = "testForm@mailinator.com";
+        String name = getRandomString(10);
+        String lastName = getRandomString(10);;
+        String email = getRandomEmail();
 
         String expectedFullName = format("%s %s", name, lastName);
 
