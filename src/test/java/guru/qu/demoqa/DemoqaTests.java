@@ -9,6 +9,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+import static java.lang.String.format;
 
 public class DemoqaTests {
     @BeforeAll
@@ -21,7 +22,10 @@ public class DemoqaTests {
     @Test
     void fillformTest() {
         String name = "Vera";
-        String lastname = "Podguk";
+        String lastName = "Podguk";
+        String email = "testForm@mailinator.com";
+
+        String expectedFullName = format("%s %s", name, lastName);
 
         open("/automation-practice-form");
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
@@ -32,8 +36,8 @@ public class DemoqaTests {
         //executeJavaScript("$('footer').remove()"); спрятать футер
         //executeJavaScript("$('#fixedban').remove()"); спрятатть рекламу
         $("[id=firstName]").setValue(name);
-        $("[id=lastName]").setValue(lastname);
-        $("[id=userEmail]").setValue("testForm@mailinator.com");
+        $("[id=lastName]").setValue(lastName);
+        $("[id=userEmail]").setValue(email);
         $("[for=gender-radio-2]").click();
         $("[id=userNumber]").setValue("1234543456");
         $("[id=dateOfBirthInput]").click();
@@ -55,8 +59,8 @@ public class DemoqaTests {
         $("#city").$(byText("Delhi")).click();
         $("#submit").scrollTo().click();
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
-        $(".table-responsive").shouldHave(text(name +" "+ lastname),
-                text("testForm@mailinator.com"),
+        $(".table-responsive").shouldHave(text(expectedFullName),
+                text(email),
                 text("Female"),
                 text("1234543456"),
                 text("31 August,1984"),
